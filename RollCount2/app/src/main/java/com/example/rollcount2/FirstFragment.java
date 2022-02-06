@@ -12,7 +12,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.example.rollcount2.databinding.FragmentFirstBinding;
 
 public class FirstFragment extends Fragment {
-
+// implements AddGameFragment.OnFragmentInteractionListener
     private FragmentFirstBinding binding;
 
     @Override
@@ -20,26 +20,26 @@ public class FirstFragment extends Fragment {
             LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState
     ) {
-
         binding = FragmentFirstBinding.inflate(inflater, container, false);
         return binding.getRoot();
-
-
-
     }
 
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
-
-            //Click "New Game"
-            @Override
-            public void onClick(View view) {
-                NavHostFragment.findNavController(FirstFragment.this)
-                        .navigate(R.id.action_FirstFragment_to_SecondFragment);
-            }
+        binding.buttonFirst.setOnClickListener((v) -> {
+            new AddGameFragment().show(getChildFragmentManager(), "ADD_GAME");
         });
+
+//        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
+//
+//            //Click "New Game"
+//            @Override
+//            public void onClick(View view) {
+//                NavHostFragment.findNavController(FirstFragment.this)
+//                        .navigate(R.id.action_FirstFragment_to_AddGameFragment);
+//            }
+//        });
     }
 
     @Override

@@ -12,8 +12,8 @@
         tools:layout="@layout/fragment_first">
 
         <action
-            android:id="@+id/action_FirstFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_FirstFragment_to_AddGameFragment"
+            app:destination="@id/AddGameFragment" />
     </fragment>
     <fragment
         android:id="@+id/SecondFragment"
@@ -25,4 +25,12 @@
             android:id="@+id/action_SecondFragment_to_FirstFragment"
             app:destination="@id/FirstFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/AddGameFragment"
+        android:name="com.example.rollcount2.AddGameFragment"
+        android:label="AddGameFragment">
+        <action
+            android:id="@+id/action_AddGameFragment_to_SecondFragment"
+            app:destination="@id/SecondFragment" />
+    </dialog>
 </navigation>
