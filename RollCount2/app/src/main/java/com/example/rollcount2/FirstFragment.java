@@ -11,7 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.rollcount2.databinding.FragmentFirstBinding;
 
-public class FirstFragment extends Fragment {
+public class FirstFragment extends Fragment implements AddGameFragment.OnFragmentInteractionListener {
 // implements AddGameFragment.OnFragmentInteractionListener
     private FragmentFirstBinding binding;
 
@@ -28,7 +28,7 @@ public class FirstFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         binding.buttonFirst.setOnClickListener((v) -> {
-            new AddGameFragment().show(getChildFragmentManager(), "ADD_GAME");
+            new AddGameFragment().show(getChildFragmentManager(), "NEW_GAME");
         });
 
 //        binding.buttonFirst.setOnClickListener(new View.OnClickListener() {
@@ -47,5 +47,9 @@ public class FirstFragment extends Fragment {
         super.onDestroyView();
         binding = null;
     }
+
+    //Click "New Game"
+    @Override
+    public void onOkPressed(Game game) {}
 
 }

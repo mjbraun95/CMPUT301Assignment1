@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 public class AddGameFragment extends DialogFragment {
-//        implements AddGameFragment.OnFragmentInteractionListener {
 
     private EditText gameName;
     private EditText dicePerRoll;
@@ -57,7 +56,7 @@ public class AddGameFragment extends DialogFragment {
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
             .setView(view)
-            .setTitle("Add game")
+            .setTitle("New game")
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 //When OK is pressed

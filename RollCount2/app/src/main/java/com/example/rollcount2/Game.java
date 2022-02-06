@@ -6,11 +6,13 @@ public class Game implements Serializable {
     private String gameName;
     private String dicePerRoll;
     private String sidesPerDie;
+    private String numberOfRolls;
 
     Game(String gameName, String dicePerRoll, String sidesPerDie) {
         this.gameName = gameName;
         this.dicePerRoll = dicePerRoll;
         this.sidesPerDie = sidesPerDie;
+        this.numberOfRolls = "0";
     }
 
     public String getGameName() {
@@ -25,6 +27,10 @@ public class Game implements Serializable {
         return this.sidesPerDie;
     }
 
+    public String getNumberOfRolls() {
+        return this.numberOfRolls;
+    }
+
     public void setGameName(String gameName) {
         this.gameName = gameName;
     }
@@ -35,5 +41,9 @@ public class Game implements Serializable {
 
     public void setSidesPerDie(String sidesPerDie) {
         this.sidesPerDie = sidesPerDie;
+    }
+
+    public void setNumberOfRolls() {
+        this.numberOfRolls = numberOfRolls;
     }
 }
