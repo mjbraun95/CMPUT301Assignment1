@@ -18,11 +18,13 @@ public class AddGameFragment extends DialogFragment {
     private EditText gameName;
     private EditText dicePerRoll;
     private EditText sidesPerDie;
+    private EditText numberOfRolls;
     private EditText dateCreated;
     private OnFragmentInteractionListener listener;
 
     public interface OnFragmentInteractionListener {
-        void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String dateCreatedString);
+        public void changeFragment(int id);
+        void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String numberOfRollsString, String dateCreatedString);
     }
 
 //    @Override
@@ -51,6 +53,7 @@ public class AddGameFragment extends DialogFragment {
         gameName = view.findViewById(R.id.game_name_editText);
         dicePerRoll = view.findViewById(R.id.dice_per_roll_editText);
         sidesPerDie = view.findViewById(R.id.sides_per_die_editText);
+        numberOfRolls = view.findViewById(R.id.sides_per_die_editText);
         dateCreated = view.findViewById(R.id.date_started_editText);
 //        Game game = savedInstanceState.
 //        newInstance()
@@ -69,8 +72,9 @@ public class AddGameFragment extends DialogFragment {
                     String gameNameString = gameName.getText().toString();
                     String dicePerRollString = dicePerRoll.getText().toString();
                     String sidesPerDieString = sidesPerDie.getText().toString();
+                    String numberOfRollsString = numberOfRolls.getText().toString();
                     String dateCreatedString = dateCreated.getText().toString();
-                    listener.onOkPressed(gameNameString, dicePerRollString, sidesPerDieString, dateCreatedString);
+                    listener.onOkPressed(gameNameString, dicePerRollString, sidesPerDieString, numberOfRollsString, dateCreatedString);
                 }
             }).create();
 

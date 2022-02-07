@@ -4,17 +4,19 @@ import java.io.Serializable;
 import java.sql.Date;
 
 public class Game implements Serializable {
+//    private String id;
     private String gameName;
     private String dicePerRoll;
     private String sidesPerDie;
     private String numberOfRolls;
     private String dateStarted;
 
-    Game(String gameName, String dicePerRoll, String sidesPerDie, String dateStarted) {
+    Game(String gameName, String dicePerRoll, String sidesPerDie, String numberOfRolls, String dateStarted) {
+//        this.id = id;
         this.gameName = gameName;
         this.dicePerRoll = dicePerRoll;
         this.sidesPerDie = sidesPerDie;
-        this.numberOfRolls = "0";
+        this.numberOfRolls = numberOfRolls;
         this.dateStarted = dateStarted;
     }
 

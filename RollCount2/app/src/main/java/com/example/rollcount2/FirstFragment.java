@@ -7,13 +7,20 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.rollcount2.databinding.FragmentFirstBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class FirstFragment extends Fragment implements AddGameFragment.OnFragmentInteractionListener {
 // implements AddGameFragment.OnFragmentInteractionListener
     private FragmentFirstBinding binding;
+
+    //https://stackoverflow.com/questions/34963505/change-fragments-when-button-is-clicked
+    public FirstFragment() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(
@@ -50,6 +57,22 @@ public class FirstFragment extends Fragment implements AddGameFragment.OnFragmen
 
     //Click "New Game"
     @Override
-    public void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String dateCreatedString) {}
+    public void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String numberOfRollsString, String dateCreatedString) {}
 
+    //https://stackoverflow.com/questions/34963505/change-fragments-when-button-is-clicked
+    @Override
+    public void changeFragment(int id){
+//        if (id == 1) {
+//            FirstFragment fragment = new FirstFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_host_fragment_content_main, fragment);
+//            ft.commit();
+//        }
+//        else if (id == 2) {
+//            SecondFragment fragment = new SecondFragment();
+//            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+//            ft.replace(R.id.nav_host_fragment_content_main, fragment);
+//            ft.commit();
+//        }
+    }
 }

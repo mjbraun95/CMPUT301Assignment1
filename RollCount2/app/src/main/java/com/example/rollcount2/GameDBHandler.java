@@ -6,7 +6,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DBHandler extends SQLiteOpenHelper {
+public class GameDBHandler extends SQLiteOpenHelper {
 
     // creating a constant variables for our database.
     // below variable is for our database name.
@@ -30,11 +30,13 @@ public class DBHandler extends SQLiteOpenHelper {
     // below variable for our game description column.
     private static final String SIDES_PER_DIE_COL = "SidesPerDie";
 
+    private static final String NUMBER_OF_ROLLS_COL = "NumberOfRolls";
+
     // below variable is for our game tracks column.
     private static final String DATE_STARTED_COL = "DateStarted";
 
     // creating a constructor for our database handler.
-    public DBHandler(Context context) {
+    public GameDBHandler(Context context) {
         super(context, DB_NAME, null, DB_VERSION);
     }
 
@@ -50,6 +52,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 + NAME_COL + " TEXT,"
                 + DICE_PER_ROLL_COL + " TEXT,"
                 + SIDES_PER_DIE_COL + " TEXT,"
+                + NUMBER_OF_ROLLS_COL + " TEXT,"
                 + DATE_STARTED_COL + " TEXT)";
 
         // at last we are calling a exec sql
@@ -58,7 +61,7 @@ public class DBHandler extends SQLiteOpenHelper {
     }
 
     // this method is use to add new game to our sqlite database.
-    public void addNewGame(String gameName, String dicePerRoll, String sidesPerDie, String dateStarted) {
+    public void addNewGame(String gameName, String dicePerRoll, String sidesPerDie, String dateStarted, String numberOfRolls) {
 
         // on below line we are creating a variable for
         // our sqlite database and calling writable method
@@ -74,6 +77,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(NAME_COL, gameName);
         values.put(DICE_PER_ROLL_COL, dicePerRoll);
         values.put(SIDES_PER_DIE_COL, sidesPerDie);
+        values.put(NUMBER_OF_ROLLS_COL, numberOfRolls);
         values.put(DATE_STARTED_COL, dateStarted);
 
         // after adding all values we are passing

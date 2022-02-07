@@ -1,17 +1,14 @@
 package com.example.rollcount2;
 
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-
-import com.example.rollcount2.databinding.AddGameFragmentLayoutBinding;
-import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.view.View;
-
+import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
@@ -48,30 +45,42 @@ public class MainActivity extends AppCompatActivity implements AddGameFragment.O
 
     private EditText gameNameEdt, dicePerRollEdt, sidesPerDieEdt, dateCreatedEdt;
     private Button addGameBtn;
-    private DBHandler dbHandler;
+    private GameDBHandler gameDbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        binding2 = AddGameFragmentLayoutBinding.inflate()
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         setSupportActionBar(binding.toolbar);
 
         // creating a new dbhandler class
         // and passing our context to it.
-        dbHandler = new DBHandler(MainActivity.this);
+        gameDbHandler = new GameDBHandler(MainActivity.this);
+        SQLiteDatabase db = gameDbHandler.getReadableDatabase();
+        Cursor cursorGames = db.rawQuery("SELECT * FROM " + "MyGames", null);
 
         gameList = findViewById(R.id.game_list);
-        String []gameNames = {"Game1", "Game2", "Game3"};
-        String []dicePerRoll = {"1", "2", "3"};
-        String []sidesPerDie = {"2", "3", "4"};
-        String []dateCreated = {"Jan 31st", "Feb 1st", "Feb 2nd"};
+//        String []gameNames = {"Game1", "Game2", "Game3"};
+//        String []dicePerRoll = {"1", "2", "3"};
+//        String []sidesPerDie = {"2", "3", "4"};
+//        String []dateCreated = {"Jan 31st", "Feb 1st", "Feb 2nd"};
         gameDataList = new ArrayList<>();
-        for (int i=0; i<gameNames.length; i++) {
-            gameDataList.add(new Game(gameNames[i], dicePerRoll[i], sidesPerDie[i], dateCreated[i]));
+        //Moving DB data into gameDataList
+        if (cursorGames.moveToFirst()) {
+            do {
+                gameDataList.add(new Game(cursorGames.getString(0),
+                        cursorGames.getString(1),
+                        cursorGames.getString(2),
+                        cursorGames.getString(3),
+                        cursorGames.getString(4)));
+            } while (cursorGames.moveToNext());
         }
+        cursorGames.close();
+//        for (int i=0; i<gameNames.length; i++) {
+//            gameDataList.add(new Game(gameNames[i], dicePerRoll[i], sidesPerDie[i], dateCreated[i]));
+//        }
         gameAdapter = new CustomList(this, gameDataList);
         gameList.setAdapter(gameAdapter);
         //Get navController
@@ -80,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements AddGameFragment.O
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         //When clicked on a Game
         gameList.setOnItemClickListener((adapterView,view,position,id) -> {
-//            (new AddGameFragment().newInstance(gameAdapter.getItem(position))).show(getSupportFragmentManager(), "ADD_GAME");
+//            (new SecondFragment().newInstance(gameAdapter.getItem(position)))., "ADD_GAME");
             navController.navigate(R.id.action_FirstFragment_to_SecondFragment);
         });
 
@@ -153,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements AddGameFragment.O
     }
 
     @Override
-    public void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String dateCreatedString) {
+    public void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String numberOfRollsString, String dateCreatedString) {
 //        // initializing all our variables.
 //        gameNameEdt = findViewById(R.id.game_name_editText);
 //        dicePerRollEdt = findViewById(R.id.dice_per_roll_editText);
@@ -167,14 +176,14 @@ public class MainActivity extends AppCompatActivity implements AddGameFragment.O
 //        String dateCreatedString = game.getDateStarted();
 
         // validating if the text fields are empty or not.
-        if (gameNameString.isEmpty() || dicePerRollString.isEmpty() || sidesPerDieString.isEmpty() || dateCreatedString.isEmpty()) {
+        if (gameNameString.isEmpty() || dicePerRollString.isEmpty() || sidesPerDieString.isEmpty() || numberOfRollsString.isEmpty() || dateCreatedString.isEmpty()) {
             Toast.makeText(MainActivity.this, "Please enter all the data..", Toast.LENGTH_SHORT).show();
             return;
         }
-        gameAdapter.add(new Game(gameNameString, dicePerRollString, sidesPerDieString, dateCreatedString));
+        gameAdapter.add(new Game(gameNameString, dicePerRollString, sidesPerDieString, numberOfRollsString, dateCreatedString));
         // on below line we are calling a method to add new
         // game to sqlite data and pass all our values to it.
-        dbHandler.addNewGame(gameNameString, dicePerRollString, sidesPerDieString, dateCreatedString);
+        gameDbHandler.addNewGame(gameNameString, dicePerRollString, sidesPerDieString, numberOfRollsString, dateCreatedString);
 
 //        // after adding the data we are displaying a toast message.
         Toast.makeText(MainActivity.this, (gameNameString + " has been added."), Toast.LENGTH_SHORT).show();
@@ -182,5 +191,22 @@ public class MainActivity extends AppCompatActivity implements AddGameFragment.O
 
 //        NavHostFragment.findNavController(navControl)
 //                .navigate(R.id.action_AddGameFragment_to_SecondFragment);
+    }
+
+    //https://stackoverflow.com/questions/34963505/change-fragments-when-button-is-clicked
+    @Override
+    public void changeFragment(int id){
+        if (id == 1) {
+            FirstFragment fragment = new FirstFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment_content_main, fragment);
+            ft.commit();
+        }
+        else if (id == 2) {
+            SecondFragment fragment = new SecondFragment();
+            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+            ft.replace(R.id.nav_host_fragment_content_main, fragment);
+            ft.commit();
+        }
     }
 }
