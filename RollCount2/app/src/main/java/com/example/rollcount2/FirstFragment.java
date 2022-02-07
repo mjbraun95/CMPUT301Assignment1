@@ -50,6 +50,6 @@ public class FirstFragment extends Fragment implements AddGameFragment.OnFragmen
 
     //Click "New Game"
     @Override
-    public void onOkPressed(Game game) {}
+    public void onOkPressed(String gameNameString, String dicePerRollString, String sidesPerDieString, String dateCreatedString) {}
 
 }

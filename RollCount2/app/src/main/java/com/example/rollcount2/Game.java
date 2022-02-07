@@ -1,18 +1,21 @@
 package com.example.rollcount2;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Game implements Serializable {
     private String gameName;
     private String dicePerRoll;
     private String sidesPerDie;
     private String numberOfRolls;
+    private String dateStarted;
 
-    Game(String gameName, String dicePerRoll, String sidesPerDie) {
+    Game(String gameName, String dicePerRoll, String sidesPerDie, String dateStarted) {
         this.gameName = gameName;
         this.dicePerRoll = dicePerRoll;
         this.sidesPerDie = sidesPerDie;
         this.numberOfRolls = "0";
+        this.dateStarted = dateStarted;
     }
 
     public String getGameName() {
@@ -23,13 +26,11 @@ public class Game implements Serializable {
         return this.dicePerRoll;
     }
 
-    public String getSidesPerDie() {
-        return this.sidesPerDie;
-    }
+    public String getSidesPerDie() { return this.sidesPerDie; }
 
-    public String getNumberOfRolls() {
-        return this.numberOfRolls;
-    }
+    public String getNumberOfRolls() { return this.numberOfRolls; }
+
+    public String getDateStarted() { return this.dateStarted; }
 
     public void setGameName(String gameName) {
         this.gameName = gameName;
@@ -43,7 +44,9 @@ public class Game implements Serializable {
         this.sidesPerDie = sidesPerDie;
     }
 
-    public void setNumberOfRolls() {
+    public void setNumberOfRolls(String numberOfRolls) {
         this.numberOfRolls = numberOfRolls;
     }
+
+    public void getDateStarted(String dateStarted) { this.dateStarted = dateStarted; }
 }

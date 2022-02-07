@@ -16,4 +16,8 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/nav_graph" />
+<!--    <include-->
+<!--        android:id="@+id/include"-->
+<!--        layout="@layout/content" />-->
+
 </androidx.constraintlayout.widget.ConstraintLayout>

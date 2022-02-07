@@ -33,7 +33,7 @@
         android:name="com.example.rollcount2.AddGameFragment"
         android:label="AddGameFragment">
         <action
-            android:id="@+id/action_AddGameFragment_to_SecondFragment"
-            app:destination="@id/SecondFragment" />
+            android:id="@+id/action_AddGameFragment_to_FirstFragment"
+            app:destination="@id/FirstFragment" />
     </dialog>
 </navigation>

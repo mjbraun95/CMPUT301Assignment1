@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Game Name"
+        android:text="0"
         android:inputType="textPersonName" />
 
     <EditText
@@ -18,6 +19,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="# of dice per roll"
+        android:text="1"
         android:inputType="textPersonName" />
 
     <EditText
@@ -26,5 +28,23 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="# of sides per die"
+        android:text="2"
         android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/date_started_editText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Date Started"
+        android:text="3"
+        android:inputType="textPersonName" />
+
+    <Button
+        android:id="@+id/idBtnAddGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Create Game"
+        android:textAllCaps="false" />
 </LinearLayout>
